@@ -3,5 +3,13 @@
 <% end %>
 
 <% @items.each do |item| %>
-  <p><%= item.title %> | <%= number_to_currency(item.price) %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) %></p>
+  <p><%= item.title %> | <%= "$#{item.price.to_f/100}" %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) %></p>
 <% end %>
+
+<% if user_signed_in? %>
+  <%= "Signed in as #{@user.email}"%>
+  <%= link_to "Sign out", destroy_user_session_path%>
+ <% else %>
+  <%= link_to "sign in", new_user_session_path %>
+  <%= link_to "Sign up", new_user_registration_path%>
+ <% end %>

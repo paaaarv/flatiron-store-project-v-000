@@ -1,7 +1,14 @@
 <h1><%= @category.title %></h1>
 
-<ul>
-<% @category.items.each do |item| %>
-    <li><%= link_to item.title, item_path(item) %></li>
-<% end %>
-</ul>
+
+  <ul>
+    <% @category.items.each do |item| %>
+      <li><%= link_to item.title, item_path(item)%></li>
+      <li> <%= "$#{item.price.to_f/100}"%>
+      <% if @user%>
+        <%= form_tag category_path(@category), method: 'post'%>
+          <%= hidden_field :item,  value: item.id%>
+        <%=submit_tag "Add to Cart"%>
+      <%end%>
+    <% end %>
+  </ul>
