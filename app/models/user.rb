@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :carts
-  def current_cart=(cart)
+  def current_cart=
+    Cart.find_or_create_by(user_id: self.id)
   end
 
   def current_cart
-    self.carts.first
+    return current_cart
   end
 end
