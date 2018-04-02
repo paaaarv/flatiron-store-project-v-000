@@ -15,3 +15,4 @@ Item.all.each do |item|
 end
 
 @user = User.create(email: "pkumar@trinity.edu", password: "password")
+@cart = Cart.create(title: "Parv's cart", user_id: 1)

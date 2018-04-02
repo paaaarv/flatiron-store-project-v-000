@@ -5,11 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :carts
-  def current_cart=
-    Cart.find_or_create_by(user_id: self.id)
-  end
 
-  def current_cart
-    return current_cart
-  end
+  attr_accessor :current_cart
+
 end

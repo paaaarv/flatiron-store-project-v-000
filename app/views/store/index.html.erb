@@ -1,11 +1,16 @@
+
 <% @categories.each do |category| %>
   <%= link_to category.title, category_path(category) %>
 <% end %>
 
 <% @items.each do |item| %>
-  <p><%= item.title %> | <%= "$#{item.price.to_f/100}" %> | <%= button_to 'Add to Cart', {controller: line_items, action:create, item_id: item.id, cart_id: @user.current_cart.id} %></p>
+  <p><%= item.title %> | <%= "$#{item.price.to_f/100}" %> |
+    <%if @user%>
+      <%= button_to 'Add to Cart', edit_cart_path(@user.current_cart, item_ids: item.id )%></p>
+    <%end%>
 <% end %>
-
+<br>
+<br>
 <% if user_signed_in? %>
   <%= "Signed in as #{@user.email}"%>
   <%= link_to "Sign out", destroy_user_session_path%>
