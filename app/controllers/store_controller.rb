@@ -6,9 +6,7 @@ class StoreController < ApplicationController
     @items = Item.available_items
     if user_signed_in?
       @user = current_user
-      @current_cart = @user.current_cart
-    else
-      @current_cart = nil
+      @user.current_cart = Cart.find_by(user_id: @user.id, status: nil)
     end
   end
 

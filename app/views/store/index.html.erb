@@ -1,5 +1,11 @@
+<%require 'pry'%>
 <br>
 <br>
+
+<% if user_signed_in? && @user.current_cart%>
+  <h4><%= link_to "Cart", cart_path(@user.current_cart.id)%> </h4>
+<%end%>
+
 
 <% if @current_cart%>
   <h4><%= link_to "Cart", cart_path(@current_cart)%> </h4>
@@ -21,6 +27,7 @@
       <%end%>
     <% end %>
 <%end%>
+
 
 <br>
 <br>

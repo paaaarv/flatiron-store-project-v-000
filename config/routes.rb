@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :orders, only: [:show]
 
   post 'carts/:id/edit', to: 'carts#edit', as: 'edit'
+
   post '/line_items/:id', to: "line_items#create", as: "create"
+
 
 end
