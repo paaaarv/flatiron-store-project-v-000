@@ -12,4 +12,7 @@
 
 <p>Order total: <strong><%= number_to_currency(@current_cart.total) %></strong> </p>
 
-<%= button_to 'Checkout', edit_cart_path(@current_cart) %>
+
+<% if @current_cart.status == "unsubmitted" %>
+  <%= button_to 'Checkout', edit_cart_path(@current_cart) %>
+<%end%> 

@@ -1,7 +1,10 @@
-<%if @user%>
-  <%= link_to "Cart", cart_path(@current_cart) %>
-<%end%>
 <br>
+<br>
+
+<% if @current_cart%>
+  <h4><%= link_to "Cart", cart_path(@current_cart)%> </h4>
+<%end%>
+
 
 <% @categories.each do |category| %>
   <%= link_to category.title, category_path(category) %>
@@ -9,15 +12,17 @@
 
 <% @items.each do |item| %>
   <p><%= item.title %> | <%= "$#{item.price.to_f/100}" %> |
-    <%if @user%>
-      <%= button_to 'Add to Cart', edit_cart_path(@user.current_cart, item_ids: item.id )%></p>
+    <%if user_signed_in?%>
+      <%=form_tag line_items_path do%>
+        <%=submit_tag "Add to Cart"%>
+      <%end%>
     <%end%>
 <% end %>
 <br>
 <br>
 <% if user_signed_in? %>
   <%= "Signed in as #{@user.email}"%>
-  <%= link_to "Sign out", destroy_user_session_path%>
+  <%= link_to "Sign out", destroy_user_session_path, :method => :delete%>
  <% else %>
   <%= link_to "sign in", new_user_session_path %>
   <%= link_to "Sign up", new_user_registration_path%>
