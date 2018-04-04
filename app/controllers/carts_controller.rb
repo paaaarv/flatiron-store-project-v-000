@@ -4,9 +4,8 @@ class CartsController < ApplicationController
   def show
     if current_user
       @user = current_user
-      @current_cart = Cart.find(params[:id])
-      @user.current_cart = @current_cart
-      @user.current_cart.save
+      @current_cart = @user.current_cart
+
     else
       redirect_to new_user_session_path
     end
@@ -21,6 +20,7 @@ class CartsController < ApplicationController
       @item.save
     end
     current_user.current_cart = nil
+    current_user.save
     redirect_to cart_path(@cart)
   end
 end
