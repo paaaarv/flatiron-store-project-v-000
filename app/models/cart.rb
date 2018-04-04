@@ -6,10 +6,11 @@ class Cart < ActiveRecord::Base
 
 
   def total
-    array = []
     x = 0
-    self.items.each do |item|
-      x+=item.price
+    self.line_items.each do |lineitem|
+      @item = Item.find(lineitem.item_id)
+      @price = @item.price * lineitem.quantity
+      x+= @price
     end
     x
   end
