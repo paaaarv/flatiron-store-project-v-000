@@ -5,19 +5,23 @@
   <h4><%= link_to "Cart", cart_path(@current_cart)%> </h4>
 <%end%>
 
-
+<br>
 <% @categories.each do |category| %>
   <%= link_to category.title, category_path(category) %>
 <% end %>
+<br>
 
 <% @items.each do |item| %>
   <p><%= item.title %> | <%= "$#{item.price.to_f/100}" %> |
     <%if user_signed_in?%>
-      <%=form_tag line_items_path do%>
-        <%=submit_tag "Add to Cart"%>
+
+      <%= form_tag("/line_items?item_id=#{item.id}", method: "post") do %>
+        <%= hidden_field_tag(:item_id, item.id)%>
+        <%= submit_tag ("Add to Cart") %>
       <%end%>
-    <%end%>
-<% end %>
+    <% end %>
+<%end%>
+
 <br>
 <br>
 <% if user_signed_in? %>
