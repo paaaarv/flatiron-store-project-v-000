@@ -3,7 +3,7 @@ class Cart < ActiveRecord::Base
   has_many :line_items
   has_many :items, through: :line_items
   belongs_to :user
-  belongs_to :current_cart, class_name: "User", foreign_key: "user_id"
+
 
   def total
     array = []
